@@ -1,0 +1,66 @@
+<#include "/manage/common/top.html" >
+
+<div id="content" class="col-lg-10 col-sm-10">
+	<!-- content starts -->
+	<div>
+		<ul class="breadcrumb">
+			<li><a href="/manage/index">系统首页</a></li>
+			<li><a href="list">列表管理</a></li>
+			<li>添加</li>
+		</ul>
+	</div>
+
+	<div class="row">
+		<div class="box col-md-12">
+			<div class="box-inner">
+				<div class="box-content">
+					<form role="form" action="add" method="post" enctype="multipart/form-data">
+						<div class="form-group">
+							<label for="type">使用位置</label> 
+							<select name="type" class="form-control">
+								<option value="0">首页</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="imgfile">大图</label> 
+							<input type="file" class="form-control" name="imgfile" />
+							<div class="alert alert-info">
+				                <strong>提示!</strong> 请使用<code>宽为：612px(像素)，高为：160px(像素)</code>的图片，否则会引起变形。
+				            </div>
+						</div>
+						<div class="form-group">
+							<label for="smimgfile">小图</label> 
+							<input type="file" class="form-control" name="smimgfile" />
+							<div class="alert alert-info">
+				                <strong>提示!</strong> 请使用<code>宽为：113px(像素)，高为：42px(像素)</code>的图片，否则会引起变形。
+				            </div>
+						</div>
+						<div class="form-group">
+							<label for="sort">显示顺序</label> 
+							<select name="sort" class="form-control">
+								<option value="1">第一张</option>
+								<option value="2">第二张</option>
+								<option value="3">第三张</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="alt">文字提示</label> 
+							<input type="text" class="form-control" name="alt" />
+							<div class="alert alert-info">
+				                <strong>提示!</strong> 用于当鼠标移动到该图片上时，提示出的文字信息，可以不填。
+				            </div>
+						</div>
+						<button type="submit" class="btn btn-primary">添加</button>
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/span-->
+
+	<!-- content ends -->
+
+<#include "/manage/common/botton.html" >
+<!-- 当前页面交互js -->
+<script type="text/javascript" src="/resources/js/manage/positiontype.js"></script>

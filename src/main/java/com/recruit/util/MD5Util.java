@@ -39,4 +39,8 @@ public class MD5Util {
 
 		return hexValue.toString();
 	}
+	
+	public static void main(String[] args) {
+		System.out.println(MD5("xjw1234"));
+	}
 }

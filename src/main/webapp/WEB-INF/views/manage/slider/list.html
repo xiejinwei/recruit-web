@@ -1,0 +1,91 @@
+<#include "/manage/common/top.html" >
+
+<div id="content" class="col-lg-10 col-sm-10">
+	<!-- content starts -->
+	<div>
+		<ul class="breadcrumb">
+			<li><a href="/manage/index">系统首页</a></li>
+			<li>列表管理</li>
+		</ul>
+	</div>
+
+	<div class="row">
+		<div class="box col-md-12">
+			<div class="box-inner">
+				<div class="box-content">
+					<div class="alert alert-info">
+						<a href="add"> 添加轮播</a>
+					</div>
+					<table class="table table-bordered table-striped table-condensed">
+						<thead>
+							<tr>
+								<th width="25%">大图</th>
+								<th width="10%">小图</th>
+								<th width="5%">使用位置</th>
+								<th width="10%">提示文字</th>
+								<th>状态</th>
+								<th>添加时间</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<#if list??> <#list list as s>
+							<tr>
+								<td><img alt="大图预览" src="${s.img!'' }" width="100%"></td>
+								<td><img alt="小图预览" src="${s.smimg!'' }" width="100%"></td>
+								<td><#if s.type==0>首页</#if></td>
+								<td style="word-break: break-all; word-wrap:break-word;">${s.alt!'' }</td>
+								<td><#if s.status==0>未使用<#elseif s.status==1>已使用</#if></td>
+								<td>${s.createtime?string('yyyy-MM-dd')}</td>
+								<td>
+									<#if s.status==0>
+									<a class="btn btn-success btn-sm" href="audit?id=${s.id!'' }"> 
+										<i class="glyphicon glyphicon-ok-sign icon-white"></i> 使用
+									</a>
+									<a class="btn btn-info btn-sm" href="update?id=${s.id!'' }"> 
+										<i class="glyphicon glyphicon-edit icon-white"></i> 修改
+									</a>
+									<a class="btn btn-danger btn-sm" onclick="deleteline('${s.id!'' }')">
+										<i class="glyphicon glyphicon-trash icon-white"></i> 删除
+									</a>
+									</#if>
+									<#if s.status==1>
+										<a class="btn btn-success btn-sm" href="unaudit?id=${s.id!'' }"> 
+										<i class="glyphicon glyphicon-ok-sign icon-white"></i> 停止使用
+									</a>
+									</#if>
+								</td>
+							</tr>
+							</#list> </#if>
+						</tbody>
+					</table>
+					${url!'' }
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/span-->
+
+	<!-- content ends -->
+</div>
+<div class="modal fade in" id="myModal">
+  <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3>删除数据</h3>
+            </div>
+            <div class="modal-body">
+                <p>你确定要删除当前数据吗？</p>
+                <input type="hidden" id="delid" />
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default" data-dismiss="modal">取消</a>
+                <a class="btn btn-primary" onclick="deletedata('/manage/slider/delete')" >删除</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/#content.col-md-0-->
+<#include "/manage/common/botton.html" >
+<script type="text/javascript" src="/resources/js/manage/positiontype.js"></script>

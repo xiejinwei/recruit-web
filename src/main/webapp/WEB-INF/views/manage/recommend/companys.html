@@ -1,0 +1,66 @@
+<#include "/manage/common/top.html" >
+
+<div id="content" class="col-lg-10 col-sm-10">
+	<!-- content starts -->
+	<div>
+		<ul class="breadcrumb">
+			<li><a href="/manage/index">系统首页</a></li>
+			<li><a href="list">列表管理</a></li>
+			<li>添加推荐</li>
+		</ul>
+	</div>
+
+	<div class="row">
+		<div class="box col-md-12">
+			<div class="box-inner">
+				<div class="box-content">
+				<form action="add" method="post">
+					<table class="table table-bordered table-striped table-condensed" id="types">
+						<thead>
+							<tr>
+								<th width="30%">公司全称</th>
+								<th>领域</th>
+								<th>选择</th>
+							</tr>
+						</thead>
+						<tbody>
+							<#if list??> <#list list as r>
+							<tr>
+								<td>${r.fullname!'' }</td>
+								<td>${r.trade!'' }</td>
+								<td><input type="checkbox" name="cid" value="${r.id!'' }" /></td>
+							</tr>
+							</#list> </#if>
+						</tbody>
+					</table>
+					${url!'' }
+				</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/span-->
+
+	<!-- content ends -->
+</div>
+<div class="modal fade in" id="myModal">
+  <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3>删除数据</h3>
+            </div>
+            <div class="modal-body">
+                <p>你确定要删除当前数据吗？</p>
+                <input type="hidden" id="delid" />
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default" data-dismiss="modal">取消</a>
+                <a class="btn btn-primary" onclick="deletedata('/manage/recommend/delete')" >删除</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/#content.col-md-0-->
+<#include "/manage/common/botton.html" >
+<script type="text/javascript" src="/resources/js/manage/positiontype.js"></script>

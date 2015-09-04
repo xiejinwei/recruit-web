@@ -29,20 +29,22 @@ public class Vfiles implements Serializable {
 	 */
 	public static final int TYPE_FILE = -1;
 	/**
+	 * 首页轮播
+	 */
+	public static final int TYPE_HOME_SLIDER=0;
+
+	/**
 	 * 用户头像
 	 */
 
 	private String id;
 	private String srcid;// 来源ID
 	private int type;// 来源类型
-	// private String path;// 文件保存地址
+	private String path;// 文件保存地址
 	private String url;// 文件浏览器调用地址
 	private Date createtime;// 上传时间
-	private String userid;// 上传文件用户
 	private String filename;// 文件名
-	private String href;// 图片超链接地址
 	private int issm;// 是否缩略图0：否 1：是
-	private int isextension;// 是否加入推广0：未加入1：已加入
 
 	@Id
 	@GenericGenerator(name = "UUID", strategy = "uuid")
@@ -101,31 +103,13 @@ public class Vfiles implements Serializable {
 		this.createtime = createtime;
 	}
 
-	// @Column(length = 177)
-	// public String getPath() {
-	// return path;
-	// }
-	//
-	// public void setPath(String path) {
-	// this.path = path;
-	// }
-
-	@Column(length = 32)
-	public String getUserid() {
-		return userid;
+	@Column(length = 177)
+	public String getPath() {
+		return path;
 	}
 
-	public void setUserid(String userid) {
-		this.userid = userid;
-	}
-
-	@Column(length = 199)
-	public String getHref() {
-		return href;
-	}
-
-	public void setHref(String href) {
-		this.href = href;
+	public void setPath(String path) {
+		this.path = path;
 	}
 
 	@Column(length = 1, nullable = false, columnDefinition = "int default 0")
@@ -137,12 +121,4 @@ public class Vfiles implements Serializable {
 		this.issm = issm;
 	}
 
-	@Column(length = 1, nullable = false, columnDefinition = "int default 0")
-	public int getIsextension() {
-		return isextension;
-	}
-
-	public void setIsextension(int isextension) {
-		this.isextension = isextension;
-	}
 }

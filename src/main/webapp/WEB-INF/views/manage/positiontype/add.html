@@ -1,0 +1,62 @@
+<#include "/manage/common/top.html" >
+
+<div id="content" class="col-lg-10 col-sm-10">
+	<!-- content starts -->
+	<div>
+		<ul class="breadcrumb">
+			<li><a href="/manage/index">系统首页</a></li>
+			<li><a href="list">列表管理</a></li>
+			<li>添加</li>
+		</ul>
+	</div>
+
+	<div class="row">
+		<div class="box col-md-12">
+			<div class="box-inner">
+				<div class="box-content">
+					<form role="form" action="add" method="post">
+						<div class="form-group">
+							<label for="exampleInputEmail1">职位类型名称</label> 
+							<input type="text" class="form-control" placeholder="输入职位类型名称" name="name" />
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">展示级别</label> 
+							<select name="level" class="form-control" <#if ptype??><#else> onchange="gettypesbylevel(this)"</#if>>
+								<#if ptype??>
+									<option value="${ptype.level }"><#if ptype.level==0>一级<#elseif ptype.level==1>二级<#elseif ptype.level==2>三级</#if></option>
+								<#else>
+									<option value="－1">请选择</option>
+									<option value="0">一级</option>
+									<option value="1">二级</option>
+									<option value="2">三级</option>
+								</#if>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">上级类型</label> 
+							<select name="parentid" class="form-control" <#if ptype??><#else>id="parentid"</#if>>
+								<#if ptype??>
+									<option value="${ptype.id!'' }">${ptype.name!'' }</option>
+								<#else>
+									<option value="">请选择</option>
+								</#if>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">展示排序</label> 
+							<input type="text" class="form-control" placeholder="输入排序序号，建议使用数字" name="sort" <#if ptype??>value="${ptype.sort!'' }"</#if> />
+						</div>
+						<button type="submit" class="btn btn-primary">添加</button>
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/span-->
+
+	<!-- content ends -->
+
+<#include "/manage/common/botton.html" >
+<!-- 当前页面交互js -->
+<script type="text/javascript" src="/resources/js/manage/positiontype.js"></script>

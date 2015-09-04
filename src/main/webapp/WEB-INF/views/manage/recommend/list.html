@@ -1,0 +1,70 @@
+<#include "/manage/common/top.html" >
+
+<div id="content" class="col-lg-10 col-sm-10">
+	<!-- content starts -->
+	<div>
+		<ul class="breadcrumb">
+			<li><a href="/manage/index">系统首页</a></li>
+			<li>列表管理</li>
+		</ul>
+	</div>
+
+	<div class="row">
+		<div class="box col-md-12">
+			<div class="box-inner">
+				<div class="box-content">
+					<div class="alert alert-info">
+						<a href="choosecompany"> 添加公司推荐</a>
+					</div>
+					<table class="table table-bordered table-striped table-condensed" id="types">
+						<thead>
+							<tr>
+								<th width="30%">名称</th>
+								<th>添加时间</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<#if list??> <#list list as r>
+							<tr>
+								<td>${r.cname!'' }</td>
+								<td>${r.createtime?string('yyyy-MM-dd')}</td>
+								<td>
+									<a class="btn btn-danger btn-sm" onclick="deleteline('${r.id!'' }')">
+										<i class="glyphicon glyphicon-trash icon-white"></i> 删除
+									</a>
+								</td>
+							</tr>
+							</#list> </#if>
+						</tbody>
+					</table>
+					${url!'' }
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/span-->
+
+	<!-- content ends -->
+</div>
+<div class="modal fade in" id="myModal">
+  <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3>删除数据</h3>
+            </div>
+            <div class="modal-body">
+                <p>你确定要删除当前数据吗？</p>
+                <input type="hidden" id="delid" />
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default" data-dismiss="modal">取消</a>
+                <a class="btn btn-primary" onclick="deletedata('/manage/recommend/delete')" >删除</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/#content.col-md-0-->
+<#include "/manage/common/botton.html" >
+<script type="text/javascript" src="/resources/js/manage/positiontype.js"></script>

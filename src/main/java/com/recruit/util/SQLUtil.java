@@ -65,7 +65,7 @@ public class SQLUtil {
 		}
 		if (objects.length % 2 != 0)
 			throw new RuntimeException("参数传入有错，请按(name,value...)这样的键值对进行传值");
-		if (hql.indexOf("where") == -1 && hql.indexOf("WHERE") == -1) {
+		if (hql.toLowerCase().indexOf("where") == -1) {
 			hql += " where 1=1 ";
 		}
 		for (int i = 0; i < objects.length; i += 2) {

@@ -24,6 +24,11 @@ public class Page {
 	@SuppressWarnings("unused")
 	private List<Integer> nextPages;// 得到后num页的数据集合
 
+	public Page(int pageNo,int pageSize){
+		this.page=pageNo;
+		this.pageSize=pageSize;
+	}
+	
 	/**
 	 * 计算总页数
 	 * 

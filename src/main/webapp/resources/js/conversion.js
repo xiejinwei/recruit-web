@@ -1,9 +1,9 @@
-var youdao_conv_host = window.youdao_conv_host || "conv.youdao.com";
-var youdao = window.youdao || {};
-youdao.param_names = ["youdao_conv_id", "youdao_conv_label", "youdao_conv_value", "youdao_order_id", "youdao_passport", "youdao_conv_params"];
-youdao.escape = function(a) {
-    return a == null ? "" : escape(a.toString())
-};
+//var youdao_conv_host = window.youdao_conv_host || "conv.youdao.com";
+//var youdao = window.youdao || {};
+//youdao.param_names = ["youdao_conv_id", "youdao_conv_label", "youdao_conv_value", "youdao_order_id", "youdao_passport", "youdao_conv_params"];
+//youdao.escape = function(a) {
+//    return a == null ? "" : escape(a.toString())
+//};
 youdao.concat = function(b, a) {
     a = youdao.escape(a);
     if ("" != a) {
@@ -188,7 +188,7 @@ youdao.cmImageRequest = function() {
     var b = "cm_" + (+new Date());
     youdao.img
     youdao.img = window[b] = new Image(1, 1);
-    youdao.img.src = "http://dsp.youdao.com/cf.gif?source=" + a + "&r=" + (new Date()).getTime() + "&dgul=1559324";
+//    youdao.img.src = "http://dsp.youdao.com/cf.gif?source=" + a + "&r=" + (new Date()).getTime() + "&dgul=1559324";
     youdao.img.style.display = 'none';
     youdao.img.onload = function() {
         window[b] = null

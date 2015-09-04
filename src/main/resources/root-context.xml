@@ -18,7 +18,5 @@
 		<property name="maxUploadSize" value="1000000" />
 		-->
 	</bean>
-	
-	<!-- ExceptionHandler -->
-	<!-- <bean id="exceptionResolver" class="com.v2gogo.admin.exception.UnifiedExceptionHandler" /> -->
+	<bean id="exceptionHanddler" class="com.recruit.controller.ExceptionHanddler" />
 </beans>

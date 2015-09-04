@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.recruit.dao.base.BaseDao;
+import com.recruit.dao.global.BaseDao;
 import com.recruit.util.Page;
 
 @Service("baseService")
