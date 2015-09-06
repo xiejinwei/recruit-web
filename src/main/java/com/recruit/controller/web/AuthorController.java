@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.recruit.aspact.Author;
 import com.recruit.entity.company.Company;
 import com.recruit.entity.user.User;
 import com.recruit.entity.user.Userinfo;
