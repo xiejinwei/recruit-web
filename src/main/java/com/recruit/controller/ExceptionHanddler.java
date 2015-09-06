@@ -12,18 +12,18 @@ public class ExceptionHanddler implements HandlerExceptionResolver {
 
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request,
-			HttpServletResponse response, Object handler, Exception ex) {
-		ex.printStackTrace();
-		ModelAndView mv = new ModelAndView();
+			HttpServletResponse response, Object handler, Exception ex){
+		ModelAndView mv = null;
 		if (ex instanceof RBCException) {
 			if(ex.getMessage().equals("weblogout")){
-				mv.setViewName("web/login");
+				mv = new ModelAndView("redirect:/web/author/weblogout");
 				return mv;
 			}else if(ex.getMessage().equals("logout")){
-				mv.setViewName("manage/login");
+				mv = new ModelAndView("redirect:/manage/logout");
 				return mv;
 			}
 		}
+		mv = new ModelAndView();
 		if (ex instanceof RBCException) {
 			mv.addObject("exmsg", ex.getMessage());
 		} else {

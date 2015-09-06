@@ -72,7 +72,7 @@
 		</div>
 		<!-- end #header -->
 		<div id="container">
-			<!-- <script src="/resources/js/swfobject_modified.js" type="text/javascript"></script> -->
+			<script src="/resources/js/swfobject_modified.js" type="text/javascript"></script>
 			<div class="clearfix">
 
 				<div class="content_l">
@@ -80,7 +80,7 @@
 						<div style="background-color: #fff;" class="c_logo">
 							<a title="上传公司LOGO" id="logoShow" class="inline cboxElement"
 								href="#logoUploader"> <img width="190" height="190"
-								alt="公司logo" src="/resources/images/logo_default.png'"> <span>更换公司图片<br>190px*190px
+								alt="公司logo" src="${comp.logo!'/resources/images/logo_default.png' }'"> <span>更换公司图片<br>190px*190px
 									小于5M
 							</span>
 							</a>
@@ -107,23 +107,22 @@
 							已认证 <span class="va dn">已认证企业</span> </#if>
 							<div class="clear"></div>
 
-							<h1 title="fullname" class="fullname">fullname</h1>
+							<h1 title="${comp.name!''}" class="fullname">${comp.name!''}</h1>
 
-							<form class="clear editDetail dn" action="/addbaseinfo"
-								id="editDetailForm">
-								<input type="text" name="name" placeholder="请输入公司简称"
-									maxlength="15" value="name" name="companyShortName"
-									id="companyShortName"> <input type="text"
-									placeholder="一句话描述公司优势，核心价值，限50字" maxlength="50" value="slogan"
-									name="slogan" id="companyFeatures"> <input
-									type="hidden" value="id" id="companyId" name="id"> <input
-									type="submit" value="保存" id="saveDetail" class="btn_small">
-								<a id="cancelDetail" class="btn_cancel_s">取消</a>
+							<form class="clear editDetail dn"
+								action="/webcompany/addbaseinfo" id="editDetailForm">
+								<input type="hidden" name="id" value="${comp.id!'' }" /> <input
+									type="text" name="name" placeholder="请输入公司简称" maxlength="15"
+									id="companyShortName" /> <input type="text"
+									placeholder="一句话描述公司优势，核心价值，限50字" maxlength="50" name="slogan"
+									id="companyFeatures" /> <input type="submit" value="保存"
+									id="saveDetail" class="btn_small"> <a id="cancelDetail"
+									class="btn_cancel_s">取消</a>
 							</form>
 
 							<div class="clear oneword">
 								<img width="17" height="15" src="/resources/images/quote_l.png">&nbsp;
-								<span>测试的发打发打发大范德萨发</span> &nbsp;<img width="17" height="15"
+								<span>${comp.slogan!'' }</span> &nbsp;<img width="17" height="15"
 									src="/resources/images/quote_r.png">
 							</div>
 							<h3 class="dn">已选择标签</h3>

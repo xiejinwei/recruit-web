@@ -37,14 +37,14 @@ public class AuthorController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(HttpServletRequest request,String email, String password, Model model) {
+	public String login(HttpServletRequest request, String email,
+			String password, Model model) {
 		User user = userService.findEntityByParam(
 				"from User u where u.email=?", email);
 		if (user == null)
 			throw new RBCException("当前邮箱还未注册");
 		if (!user.getUserpass().equals(MD5Util.MD5(password)))
 			throw new RBCException("用户名或密码错误");
-		model.addAttribute("user", user);
 		request.getSession().setAttribute("suser", user);
 		if (user.getType() == 1) {
 			// 公司
@@ -67,15 +67,11 @@ public class AuthorController {
 			model.addAttribute("user", new Userinfo(user.getId()));
 			return "web/jianli";
 		} else {
-			model.addAttribute("comp", new Company(user.getId()));
+			model.addAttribute("comp", new Company());
 			return "web/myhome";
 		}
 	}
 
-	@RequestMapping(value = "/addinfo", method = RequestMethod.POST)
-	public String addBaseinfo(String id, String name, String gender) {
-		return "";
-	}
 
 	// 修改用户信息
 	@RequestMapping("/updateresumename")
@@ -102,12 +98,31 @@ public class AuthorController {
 	 * @param id
 	 * @return
 	 */
-	@Author(author = true)
 	@RequestMapping("/tojianli")
-	public String toJianli(Model model, String id) {
-		Userinfo user = userinfoService.findById(id, Userinfo.class);
+	public String toJianli(HttpServletRequest request, Model model) {
+		User user = (User) request.getSession().getAttribute("suser");
+		if (user==null || user.getType() == 1) {
+			return "redirect:/web/author/weblogout";
+		}
+		Userinfo userinfo = userinfoService.findById(user.getId(),
+				Userinfo.class);
 		model.addAttribute("user", user);
+		model.addAttribute("info", userinfo);
 		return "web/jianli";
+	}
+
+	/**
+	 * 网站用户安全退出
+	 * 
+	 * @url /web/author/weblogout
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/weblogout")
+	public String logout(HttpServletRequest request) {
+		request.getSession().removeAttribute("suser");
+		return "redirect:login";
 	}
 
 }

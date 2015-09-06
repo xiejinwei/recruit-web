@@ -31,8 +31,7 @@ public class Position implements Serializable {
 	private int minmonthsalary;// 最低月薪
 	private int maxmonthsalary;// 最高月薪
 	private String workcity;// 工作城市
-	private int workexperience;// 工作经验 0:不限 1:应届毕业生 2:1年以内 3:1〜3年 4:3〜5年 5:5〜10年
-								// 6:10年以上
+	private int workexperience;// 工作经验 0:不限 1:应届毕业生 2:1年以内 3:1〜3年 4:3〜5年 5:5〜10年 6:10年以上
 	private int degrees;// 学历：0:不限 1:大专 2:本科 3:硕士 4:博士及以上
 	private String positionkeyword;// 职位诱惑（关键字）
 	private String positioninfo;// 职位描述

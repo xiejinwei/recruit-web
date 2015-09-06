@@ -1,6 +1,7 @@
 package com.recruit.entity.company;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,11 +36,7 @@ public class Company implements Serializable {
 	private String city;// 所在城市
 	private String intro;// 企业简介
 	private String telephone;// 座机
-
-	public Company(String id) {
-		super();
-		this.id = id;
-	}
+	private Date createtime;
 
 	@Id
 	@Column(length = 32)
@@ -60,7 +57,7 @@ public class Company implements Serializable {
 		this.logo = logo;
 	}
 
-	@Column(length = 5, nullable = false)
+	@Column(length = 55, nullable = false)
 	public String getName() {
 		return name;
 	}
@@ -69,7 +66,7 @@ public class Company implements Serializable {
 		this.name = name;
 	}
 
-	@Column(length = 55, nullable = false)
+	@Column(length = 55)
 	public String getFullname() {
 		return fullname;
 	}
@@ -175,6 +172,14 @@ public class Company implements Serializable {
 
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
+	}
+
+	public Date getCreatetime() {
+		return createtime;
+	}
+
+	public void setCreatetime(Date createtime) {
+		this.createtime = createtime;
 	}
 
 }

@@ -1,7 +1,10 @@
 package com.recruit.service.business;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,5 +37,29 @@ public class CompanyService extends BaseService<Company> {
 		return company;
 	}
 
+	public void addCompany(User user, String id, String name, String slogan) {
+		if(StringUtils.isBlank(id)){
+			//新增
+			Company company = companyDao.findById(user.getId(), Company.class);
+			if(company!=null)
+				throw new RBCException("id参数传入错误");
+			company = new Company();
+			company.setId(user.getId());
+			company.setName(name);
+			company.setSlogan(slogan);
+			company.setCreatetime(new Date());
+			companyDao.save(company);
+		}else{
+			//修改
+			Company company = companyDao.findById(id, Company.class);
+			if(company==null)
+				throw new RBCException("没有找到公司信息");
+			if(!company.getId().equals(id))
+				throw new RBCException("只能操作自己公司的信息");
+			company.setName(name);
+			company.setSlogan(slogan);
+			companyDao.update(company);
+		}
+	}
 	
 }
