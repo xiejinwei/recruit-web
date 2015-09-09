@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.recruit.aspact.Author;
 import com.recruit.entity.company.Company;
 import com.recruit.entity.user.User;
 import com.recruit.entity.user.Userinfo;
@@ -62,23 +63,21 @@ public class AuthorController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String redister(int type, String email, String password, Model model) {
 		User user = userService.register(email, password, type);
-		if (type == 0) {
-			model.addAttribute("user", new Userinfo(user.getId()));
-			return "web/jianli";
+		if (user.getType() == 0) {
+			return "redirect:tojianli";
 		} else {
-			model.addAttribute("comp", new Company());
-			return "web/myhome";
+			return "redirect:/webcompany/tocompanyhome";
 		}
 	}
 
 
-	// 修改用户信息
+	// 修改用户简历名称
+	@Author(author=true)
 	@RequestMapping("/updateresumename")
-	public String updateresumename(String id, String resumename) {
-		if (StringUtils.isBlank(id))
-			throw new RBCException("主键不能为空");
-		userinfoService.updateResumename(id, resumename);
-		return "redirect:tojianli?id=" + id;
+	public String updateresumename(HttpServletRequest request,String resumename) {
+		User user = (User) request.getSession().getAttribute("suser");
+		userinfoService.updateResumename(user.getId(), resumename);
+		return "redirect:tojianli";
 	}
 
 	// 添加基本信息
@@ -97,10 +96,11 @@ public class AuthorController {
 	 * @param id
 	 * @return
 	 */
+	@Author(author=true)
 	@RequestMapping("/tojianli")
 	public String toJianli(HttpServletRequest request, Model model) {
 		User user = (User) request.getSession().getAttribute("suser");
-		if (user==null || user.getType() == 1) {
+		if (user==null || user.getType() != 0) {
 			return "redirect:/web/author/weblogout";
 		}
 		Userinfo userinfo = userinfoService.findById(user.getId(),

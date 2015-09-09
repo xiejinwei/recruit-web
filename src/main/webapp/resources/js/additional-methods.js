@@ -18,9 +18,10 @@ $(function(){
 			}, "请填写短评");
 	/*** check city**********************/
 		jQuery.validator.addMethod("checkCity",function(value, element) {
-			var reg =  /^[\u4e00-\u9fa5]{0,}$/;//只能输入汉字
+			//var reg =  /^[\u4e00-\u9fa5]{0,}$/;//只能输入汉字
+			var reg = /^[\u4E00-\u9FA5]{0,}$/;
 			return this.optional(element) || reg.test(value);
-			}, "请输入有效的公司所在城市，如：北京"); 
+			}, "请输入有效的公司所在城市，如：贵阳1"); 
 		
 	/*** 不能全部输入数字**********************/
 		jQuery.validator.addMethod("checkNum",function(value, element) {

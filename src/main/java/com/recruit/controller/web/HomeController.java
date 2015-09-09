@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.recruit.entity.base.Slider;
+import com.recruit.entity.position.Position;
 import com.recruit.entity.position.Positiontype;
+import com.recruit.service.business.PositionService;
 import com.recruit.service.business.PositiontypeService;
 import com.recruit.service.business.SliderService;
 import com.recruit.util.Page;
@@ -31,6 +33,8 @@ public class HomeController {
 	@Autowired
 	private PositiontypeService positiontypeService;
 	@Autowired
+	private PositionService positionService;
+	@Autowired
 	private SliderService sliderService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -42,12 +46,15 @@ public class HomeController {
 		List<Positiontype> types = positiontypeService
 				.findListByParams("from Positiontype pt where pt.status=1 and pt.level>0 order by pt.sort");
 		model.addAttribute("types", types);
+		//所有岗位
+		List<Position> positions = positionService.list("from Position");
+		model.addAttribute("positions", positions);
 		// 轮播
 		List<Slider> sliders = sliderService.pageList(
 				"from Slider s where s.status=1 and s.type=0 ", new Page(1, 3),
 				"order by s.sort");
 		model.addAttribute("sliders", sliders);
-		return "home";
+		return "web/home";
 	}
 
 	/**

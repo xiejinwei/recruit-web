@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.recruit.aspact.Author;
 import com.recruit.entity.company.Company;
 import com.recruit.entity.company.Recommend;
 import com.recruit.service.business.CompanyService;
@@ -28,6 +29,7 @@ public class RecommendController {
 	@Autowired
 	private CompanyService companyService;
 
+	@Author(author = true)
 	@RequestMapping("/list")
 	public String list(
 			HttpServletRequest request,
@@ -53,6 +55,7 @@ public class RecommendController {
 	 * @param pageSize
 	 * @return
 	 */
+	@Author(author = true)
 	@RequestMapping(value = "/choosecompany", method = RequestMethod.GET)
 	public String choosecompany(HttpServletRequest request, Model model,
 			@RequestParam(value = "pageNo", defaultValue = "1") int pageNo,

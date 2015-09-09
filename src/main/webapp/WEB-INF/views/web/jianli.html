@@ -49,7 +49,6 @@
 					<li><a href="/webposition/positions?type=1">社会招聘</a></li>
 					<li><a href="/webposition/positions?type=2">校园招聘</a></li>
 					<li class="current"><a href="/web/author/tojianli" rel="nofollow">简历中心</a></li>
-					<li><a href="/webcompany/tocompanyhome" rel="nofollow">发布职位</a></li>
 				</ul>
 				<dl class="collapsible_menu">
 					<dt>
@@ -57,17 +56,7 @@
 						<i></i>
 					</dt>
 					<dd>
-						<a rel="nofollow" href="jianli.html">${info.resumename!'' }</a>
-					</dd>
-					<dd>
-						<a href="collections.html">我收藏的职位</a>
-					</dd>
-					<!--<dd class="btm"><a href="subscribe.html">我的订阅</a></dd>-->
-					<dd>
-						<a href="create.html">我要招人</a>
-					</dd>
-					<dd>
-						<a href="accountBind.html">帐号设置</a>
+						<a href="accountBind.html">修改密码</a>
 					</dd>
 					<dd class="logout">
 						<a rel="nofollow" href="login.html">退出</a>
@@ -87,16 +76,16 @@
 				<div class="content_l">
 					<div class="fl" id="resume_name">
 						<div class="nameShow fl" id="showresume">
-							<h1 title="${user.resumename!'' }">${user.resumename!'输入简历名称'
+							<h1 title="${info.resumename!'' }">${info.resumename!'输入简历名称'
 								}</h1>
 							<span class="rename" onclick="renameresum(this)">重命名</span> | <a
 								target="_blank" href="/web/author/preview">预览</a>
 						</div>
 						<form class="fl dn" id="resumeNameForm"
 							action="/web/author/updateresumename" method="get">
-							<input type="text" value="${user.resumename!'' }"
-								name="resumename" class="nameEdit c9" /> <input type="hidden"
-								name="id" value="${user.id!'' }" /> <input type="submit"
+							<input type="text" value="${info.resumename!'' }"
+								name="resumename" class="nameEdit c9" /> 
+							<input type="submit"
 								value="保存" /> | <a target="_blank" href="/web/author/preview">预览</a>
 						</form>
 						<script type="text/javascript">
@@ -108,7 +97,7 @@
 					</div>
 					<!--end #resume_name-->
 					<div class="fr c5" id="lastChangedTime">
-						最后一次更新：<span>2014-07-01 15:14 </span>
+						最后一次更新：<span>${info.updatetime?string('yyyy-MM-dd HH:mm:ss')} </span>
 					</div>
 					<!--end #lastChangedTime-->
 					<div id="resumeScore">
@@ -131,7 +120,7 @@
 						<h2>基本信息</h2>
 						<span class="c_edit" onclick="openeaditinfo()"></span>
 						<div class="basicShow">
-							<span>${info.fullname!'' } | <#if
+							<span>${info.resumename!'请添加你的真实姓名' } | <#if
 								info.gender==0>男<#else>女</#if> | <#if
 								info.education==0>大专<#elseif info.education==1>本科<#elseif
 								info.education==2>硕士<#elseif info.education==3>博士<#else>其他</#if>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.recruit.aspact.Author;
 import com.recruit.entity.base.Slider;
 import com.recruit.exception.RBCException;
 import com.recruit.service.business.SliderService;
@@ -27,6 +28,7 @@ public class SliderController {
 	@Autowired
 	private SliderService sliderService;
 
+	@Author(author = true)
 	@RequestMapping("/list")
 	public String list(
 			HttpServletRequest request,
@@ -45,11 +47,13 @@ public class SliderController {
 		return "manage/slider/list";
 	}
 
+	@Author(author = true)
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String add() {
 		return "manage/slider/add";
 	}
 
+	@Author(author = true)
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String add(
 			HttpServletRequest request,
@@ -64,18 +68,21 @@ public class SliderController {
 		return "redirect:list";
 	}
 
+	@Author(author = true)
 	@RequestMapping("/audit")
 	public String audit(String id) {
 		sliderService.audit(id);
 		return "redirect:list";
 	}
 
+	@Author(author = true)
 	@RequestMapping("/unaudit")
 	public String unaudit(String id) {
 		sliderService.unaudit(id);
 		return "redirect:list";
 	}
 
+	@Author(author = true)
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public String update(Model model, String id) {
 		Slider slider = sliderService.findById(id, Slider.class);
@@ -87,6 +94,7 @@ public class SliderController {
 		return "manage/slider/update";
 	}
 
+	@Author(author = true)
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String update(
 			HttpServletRequest request,
@@ -97,6 +105,7 @@ public class SliderController {
 		return "redirect:list";
 	}
 
+	@Author(author = true)
 	@ResponseBody
 	@RequestMapping("/delete")
 	public String delete(String id) {

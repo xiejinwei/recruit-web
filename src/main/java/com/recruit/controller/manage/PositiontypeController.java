@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.recruit.aspact.Author;
 import com.recruit.entity.position.Positiontype;
 import com.recruit.exception.RBCException;
 import com.recruit.service.business.PositiontypeService;
@@ -45,6 +46,7 @@ public class PositiontypeController {
 	 * @param model
 	 * @return
 	 */
+	@Author(author=true)
 	@RequestMapping(value = "/list")
 	public String list(
 			HttpServletRequest request,
@@ -65,6 +67,7 @@ public class PositiontypeController {
 	}
 
 	// 进入添加职位类型
+	@Author(author=true)
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addtype(Model model, String pid) {
 		if (!StringUtils.isBlank(pid)) {
@@ -77,6 +80,7 @@ public class PositiontypeController {
 	}
 
 	// 保存
+	@Author(author=true)
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String addtype(Positiontype type) {
 		if (type == null)
@@ -86,6 +90,7 @@ public class PositiontypeController {
 	}
 
 	// 查询比当前级别高的类型
+	@Author(author=true)
 	@ResponseBody
 	@RequestMapping("/gettypesbylevel")
 	public List<Positiontype> getTypesByLevel(int level, Model model) {
@@ -95,6 +100,7 @@ public class PositiontypeController {
 	}
 
 	// 删除职位类型
+	@Author(author=true)
 	@ResponseBody
 	@RequestMapping("/delete")
 	public String delete(String id) {
@@ -103,6 +109,7 @@ public class PositiontypeController {
 	}
 
 	// 进入修改方法
+	@Author(author=true)
 	@RequestMapping(value = "update", method = RequestMethod.GET)
 	public String update(String id, Model model) {
 		Positiontype type = positiontypeService
@@ -117,6 +124,7 @@ public class PositiontypeController {
 	}
 
 	// 修改类型
+	@Author(author=true)
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public String update(Positiontype type) {
 		if (StringUtils.isBlank(type.getId()))
@@ -128,6 +136,7 @@ public class PositiontypeController {
 	}
 
 	// 审核类型
+	@Author(author=true)
 	@RequestMapping(value = "/audit", method = RequestMethod.GET)
 	public String audit(String id) {
 		positiontypeService.audit(id);
@@ -135,6 +144,7 @@ public class PositiontypeController {
 	}
 
 	// 取消审核
+	@Author(author=true)
 	@RequestMapping(value = "/unaudit", method = RequestMethod.GET)
 	public String unaudit(String id) {
 		positiontypeService.unAudit(id);

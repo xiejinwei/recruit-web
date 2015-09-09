@@ -49,7 +49,7 @@
 					<li><a href="/webposition/positions?type=1">社会招聘</a></li>
 					<li><a href="/webposition/positions?type=2">校园招聘</a></li>
 					<li><a href="/web/author/tojianli" rel="nofollow">简历中心</a></li>
-					<li><a href="/webcompany/tocompanyhome" rel="nofollow">发布职位</a></li>
+					<li><a href="/webposition/create" rel="nofollow">发布职位</a></li>
 				</ul>
 				<ul class="loginTop">
 					<li><a href="/web/author/login" rel="nofollow">登录</a></li>
@@ -70,16 +70,16 @@
 								${t.name!'' } <span></span>
 							</h2>
 						</div>
-						<div class="menu_sub dn">
+						<div class="menu_sub dn" style="top: ${(t_index)*58 }px;">
 							<#list types as t1> <#if t1.parentid?? && t1.parentid==t.id>
 							<dl class="reset">
-								<dt>
+								<dt style="width: 100px;>
 									<a href="#"> ${t1.name!'' } </a>
 								</dt>
 								<dd>
-									<#list types as t2> <#if t2.parentid?? && t2.parentid==t1.id> <a
+									<#if positions??><#list positions as t2> <#if t2.positiontypeid==t1.id> <a
 										href="#"<#if t2.curr==1>class="curr"</#if>>${t2.name!'' }</a>
-									</#if> </#list>
+									</#if> </#list></#if>
 								</dd>
 							</dl>
 							</#if> </#list>

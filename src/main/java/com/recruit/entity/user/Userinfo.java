@@ -35,6 +35,7 @@ public class Userinfo implements Serializable {
 	private int delivertime;// 投递次数
 	private String resumename;// 简历名称
 	private Date createtime;// 添加时间
+	private Date updatetime;// 最后一次更新
 
 	public Userinfo() {
 		super();
@@ -178,6 +179,14 @@ public class Userinfo implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Date getUpdatetime() {
+		return updatetime;
+	}
+
+	public void setUpdatetime(Date updatetime) {
+		this.updatetime = updatetime;
 	}
 
 }

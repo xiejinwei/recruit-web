@@ -31,8 +31,8 @@
 							<tr data-tt-id="${pt.id!'' }" <#if pt.parentid??>data-tt-parent-id="${pt.parentid!'' }"</#if>>
 								<td>${pt.name!'' }</td>
 								<td>
-									<#if pt.level==0>一级<#elseif
-									pt.level==1>二级<#elseif pt.level==2>三级</#if>
+									<#if pt.level==0>大类<#elseif
+									pt.level==1>分类</#if>
 								</td>
 								<td><#if pt.status==0>未使用<#elseif pt.status==1>使用中</#if></td>
 								<td>${pt.createtime?string('yyyy-MM-dd')}</td>
@@ -47,7 +47,7 @@
 									<a class="btn btn-danger btn-sm" onclick="deleteline('${pt.id!'' }')">
 										<i class="glyphicon glyphicon-trash icon-white"></i> 删除
 									</a>
-									<#if pt.level<2>
+									<#if pt.level==0>
 									<a class="btn btn-danger btn-sm" href="add?pid=${pt.id!'' }">
 										<i class="glyphicon glyphicon-plus-sign icon-white"></i> 添加下属类型
 									</a>

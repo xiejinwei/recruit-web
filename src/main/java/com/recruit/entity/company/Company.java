@@ -24,6 +24,7 @@ public class Company implements Serializable {
 	private String logo;// 公司logo
 	private String name;// 公司名称
 	private String fullname;// 全称
+	private String email;// 企业邮箱
 	private String slogan;// 口号
 	private int auther;// 是否认证 0:否 1:是
 	private String trade;// 领域
@@ -180,6 +181,14 @@ public class Company implements Serializable {
 
 	public void setCreatetime(Date createtime) {
 		this.createtime = createtime;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

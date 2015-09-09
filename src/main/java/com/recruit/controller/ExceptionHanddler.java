@@ -16,10 +16,10 @@ public class ExceptionHanddler implements HandlerExceptionResolver {
 		ModelAndView mv = null;
 		if (ex instanceof RBCException) {
 			if(ex.getMessage().equals("weblogout")){
-				mv = new ModelAndView("redirect:/web/author/weblogout");
+				mv = new ModelAndView("redirect:/web/author/login");
 				return mv;
 			}else if(ex.getMessage().equals("logout")){
-				mv = new ModelAndView("redirect:/manage/logout");
+				mv = new ModelAndView("redirect:/manage/index");
 				return mv;
 			}
 		}

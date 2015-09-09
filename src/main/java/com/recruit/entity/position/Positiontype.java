@@ -23,12 +23,11 @@ public class Positiontype implements Serializable {
 
 	private String id;
 	private String name;// 职位名称
-	private int level;// 职位级别0:一级1：二级2:三级
+	private int level;// 职位级别0:一级1：二级
 	private String parentid;// 上级id 一级职位时为null
 	private int status;// 使用状态0:未使用1:使用中－9:已删除
 	private Date createtime;
 	private String sort;// 排序 以level—为基准
-	private int curr;// 是否热门
 
 	@Id
 	@Column(length = 32)
@@ -84,22 +83,13 @@ public class Positiontype implements Serializable {
 		this.createtime = createtime;
 	}
 
-	@Column(length = 9)
+	@Column(length = 15)
 	public String getSort() {
 		return sort;
 	}
 
 	public void setSort(String sort) {
 		this.sort = sort;
-	}
-
-	@Column(length=1,nullable=false,columnDefinition="int default 0")
-	public int getCurr() {
-		return curr;
-	}
-
-	public void setCurr(int curr) {
-		this.curr = curr;
 	}
 
 }

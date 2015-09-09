@@ -1,19 +1,26 @@
 package com.recruit.controller.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.recruit.aspact.Author;
 import com.recruit.entity.company.Company;
+import com.recruit.entity.position.Position;
+import com.recruit.entity.position.Positiontype;
 import com.recruit.entity.user.User;
 import com.recruit.exception.RBCException;
 import com.recruit.service.business.CompanyService;
+import com.recruit.service.business.PositionService;
+import com.recruit.service.business.PositiontypeService;
 
 /**
  * 公司控制器
@@ -27,6 +34,10 @@ public class CompanyController {
 
 	@Autowired
 	private CompanyService companyService;
+	@Autowired
+	private PositiontypeService positiontypeService;
+	@Autowired
+	private PositionService positionService;
 
 	/**
 	 * 进入公司中心
@@ -61,7 +72,17 @@ public class CompanyController {
 
 	}
 
-	//添加公司基本信息
+	/**
+	 * 添加公司基本信息
+	 * 
+	 * @url /webcompany/addbaseinfo
+	 * @param request
+	 * @param model
+	 * @param id
+	 * @param name
+	 * @param slogan
+	 * @return
+	 */
 	@Author(author = true)
 	@RequestMapping("/addbaseinfo")
 	public String addbaseinfo(HttpServletRequest request, Model model,

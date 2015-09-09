@@ -24,9 +24,8 @@
 							<label for="exampleInputPassword1">展示级别</label> 
 							<select name="level" class="form-control" onchange="gettypesbylevel(this)">
 								<option value="－1" <#if t.level==-1>selected="selected"</#if>>请选择</option>
-								<option value="0" <#if t.level==0>selected="selected"</#if>>一级</option>
-								<option value="1" <#if t.level==1>selected="selected"</#if>>二级</option>
-								<option value="2" <#if t.level==2>selected="selected"</#if>>三级</option>
+								<option value="0" <#if t.level==0>selected="selected"</#if>>大类</option>
+								<option value="1" <#if t.level==1>selected="selected"</#if>>分类</option>
 							</select>
 						</div>
 						<div class="form-group">
@@ -39,10 +38,6 @@
 								</#list>
 								</#if>
 							</select>
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail1">展示排序</label> 
-							<input type="text" class="form-control" placeholder="输入排序序号，建议使用数字" name="sort" value="${t.sort!'' }" />
 						</div>
 						<button type="submit" class="btn btn-primary">添加</button>
 					</form>
