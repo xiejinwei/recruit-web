@@ -229,6 +229,19 @@
 				<!--/#main_banner-->
 
 				<ul id="da-thumbs" class="da-thumbs">
+					<#if recommends??>
+					<#list recommends as r>
+					<li><a href="#" target="_blank"> <img
+							src="${r.logo!''}"
+							width="113" height="113" alt="${r.cname!'' }" />
+							<div class="hot_info">
+								<h2 title="${r.cname!'' }">${r.cname!'' }</h2>
+								<em></em>
+								<p title="${r.slogan!'' }">${r.slogan!'' }</p>
+							</div>
+					</a></li>
+					</#list>
+					<#else>
 					<li><a href="h/c/1650.html" target="_blank"> <img
 							src="/resources/images/a254b11ecead45bda166afa8aaa9c8bc.jpg"
 							width="113" height="113" alt="联想" />
@@ -283,6 +296,7 @@
 								<p title="分享收集生活中的美好，遇见世界上的另外一个你">分享收集生活中的美好，遇见世界上的另外一个你</p>
 							</div>
 					</a></li>
+					</#if>
 				</ul>
 
 				<ul class="reset hotabbing">

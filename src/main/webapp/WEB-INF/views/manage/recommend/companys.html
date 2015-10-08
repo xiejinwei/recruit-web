@@ -28,11 +28,14 @@
 							<tr>
 								<td>${r.fullname!'' }</td>
 								<td>${r.trade!'' }</td>
-								<td><input type="checkbox" name="cid" value="${r.id!'' }" /></td>
+								<td><input type="checkbox" onclick="singlechose(this)" name="cid" value="${r.id!'' }" /></td>
 							</tr>
 							</#list> </#if>
 						</tbody>
 					</table>
+					<div class="col-md-6 left-block">
+						<button type="submit" class="btn btn-primary">添加</button>
+					</div>
 					${url!'' }
 				</form>
 				</div>
@@ -63,4 +66,4 @@
 </div>
 <!--/#content.col-md-0-->
 <#include "/manage/common/botton.html" >
-<script type="text/javascript" src="/resources/js/manage/positiontype.js"></script>
+<script type="text/javascript" src="/resources/js/manage/base.js"></script>

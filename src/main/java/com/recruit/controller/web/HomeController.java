@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.aspectj.bridge.MessageWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.recruit.entity.base.Slider;
+import com.recruit.entity.company.Recommend;
 import com.recruit.entity.position.Position;
 import com.recruit.entity.position.Positiontype;
 import com.recruit.service.business.PositionService;
 import com.recruit.service.business.PositiontypeService;
+import com.recruit.service.business.RecommendService;
 import com.recruit.service.business.SliderService;
 import com.recruit.util.Page;
 
@@ -36,6 +39,8 @@ public class HomeController {
 	private PositionService positionService;
 	@Autowired
 	private SliderService sliderService;
+	@Autowired
+	private RecommendService recommendService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest request, Model model) {
@@ -54,6 +59,9 @@ public class HomeController {
 				"from Slider s where s.status=1 and s.type=0 ", new Page(1, 3),
 				"order by s.sort");
 		model.addAttribute("sliders", sliders);
+		//公司推荐
+		List<Recommend> recommends = recommendService.pageList("from Recommend r", new Page(1, 6), "order by r.createtime desc");
+		model.addAttribute("recommends", recommends);
 		return "web/home";
 	}
 

@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.recruit.aspact.Author;
 import com.recruit.entity.company.Company;
@@ -31,16 +32,13 @@ public class RecommendController {
 
 	@Author(author = true)
 	@RequestMapping("/list")
-	public String list(
-			HttpServletRequest request,
-			Model model,
+	public String list(HttpServletRequest request, Model model,
 			@RequestParam(value = "pageNo", defaultValue = "1") int pageNo,
 			@RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
 			@RequestParam(value = "type", defaultValue = "-1") int type) {
 
 		Page page = new Page(pageNo, pageSize);
-		List<Recommend> list = recommendService.pageList("from Recommend s ",
-				page, "order by s.createtime desc");
+		List<Recommend> list = recommendService.pageList("from Recommend s ", page, "order by s.createtime desc");
 		model.addAttribute("list", list);
 		String url = StringUtil.getRequestGetUrl(request, "type", type);
 		model.addAttribute("url", HTMLUtil.getNumberPageHTML(page, url));
@@ -60,15 +58,27 @@ public class RecommendController {
 	public String choosecompany(HttpServletRequest request, Model model,
 			@RequestParam(value = "pageNo", defaultValue = "1") int pageNo,
 			@RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
-		List<Recommend> recommends = recommendService
-				.findListByParams("from Recommend");
+		List<Recommend> recommends = recommendService.findListByParams("from Recommend");
 		model.addAttribute("recommends", recommends);
 		Page page = new Page(pageNo, pageSize);
-		List<Company> list = companyService.pageList("from Company c", page,
-				"order by c.name");
+		List<Company> list = companyService.pageList("from Company c", page, "order by c.name");
 		model.addAttribute("list", list);
 		String url = StringUtil.getRequestGetUrl(request);
 		model.addAttribute("url", HTMLUtil.getNumberPageHTML(page, url));
 		return "manage/recommend/companys";
+	}
+
+	@Author(author = true)
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public String addRecommend(String cid) {
+		recommendService.addRecommend(cid);
+		return "redirect:list";
+	}
+	
+	@Author(author=true)
+	@RequestMapping(value="/delete")
+	public @ResponseBody String delete(String id){
+		recommendService.deleteRecommend(id);
+		return "success";
 	}
 }

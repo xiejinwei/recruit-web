@@ -20,6 +20,7 @@ import com.recruit.exception.RBCException;
 import com.recruit.service.business.CompanyService;
 import com.recruit.service.business.PositionService;
 import com.recruit.service.business.PositiontypeService;
+import com.recruit.util.Page;
 
 @Controller
 @RequestMapping("/webposition")
@@ -46,14 +47,14 @@ public class PositionController {
 	 * @return
 	 */
 	@RequestMapping("/positions")
-	public String positions(
-			HttpServletRequest request,
-			Model model,
+	public String positions(HttpServletRequest request, Model model,
 			@RequestParam(value = "pageNo", defaultValue = "1") int pageNo,
 			@RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
-			@RequestParam(value = "type", defaultValue = "0") int type,
-			String name) {
+			@RequestParam(value = "type", defaultValue = "0") int type, String name) {
 		model.addAttribute("type", type);
+		List<Position> positions = positionService.pageList("from Position p ", new Page(pageNo, pageSize),
+				"order by p.createtime desc", "and p.type=:type", type);
+		model.addAttribute("positions", positions);
 		return "web/list";
 	}
 
@@ -73,12 +74,11 @@ public class PositionController {
 			throw new RBCException("非企业用户不能发布招聘信息");
 		Company company = companyService.findById(user.getId(), Company.class);
 		model.addAttribute("comp", company);
-		List<Positiontype> types = positiontypeService
-				.findListByParams("from Positiontype t where t.status=1");
+		List<Positiontype> types = positiontypeService.findListByParams("from Positiontype t where t.status=1");
 		model.addAttribute("types", types);
 		// 获取该公司下所有已发布的岗位
-		List<Position> positions = positionService.findListByParams(
-				"from Position p where p.companyid=?", company.getId());
+		List<Position> positions = positionService.findListByParams("from Position p where p.companyid=?",
+				company.getId());
 		model.addAttribute("positions", positions);
 		return "web/createposition";
 	}
@@ -98,6 +98,6 @@ public class PositionController {
 		if (user == null || user.getType() != 1)
 			return "redirect:/web/author/weblogout";
 		positionService.addPostion(user, position);
-		return "redirect:positions?type="+position.getType();
+		return "redirect:positions?type=" + position.getType();
 	}
 }

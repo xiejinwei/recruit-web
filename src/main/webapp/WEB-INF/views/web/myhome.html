@@ -50,19 +50,13 @@
 						<i></i>
 					</dt>
 					<dd>
-						<a href="positions.html">我发布的职位</a>
-					</dd>
-					<dd>
-						<a href="">我收到的简历</a>
+						<a href="/webcompany/positions">我发布的职位</a>
 					</dd>
 					<dd class="btm">
 						<a href="/webcompany/tocompanyhome">我的公司主页</a>
 					</dd>
 					<dd>
-						<a href="jianli.html">我要找工作</a>
-					</dd>
-					<dd>
-						<a href="accountBind.html">帐号设置</a>
+						<a href="accountBind.html">修改密码</a>
 					</dd>
 					<dd class="logout">
 						<a rel="nofollow" href="login.html">退出</a>
@@ -115,10 +109,13 @@
 								action="/webcompany/addbaseinfo" id="editDetailForm">
 								<input type="hidden" name="id" value="${comp.id!'' }" /> <input
 									type="text" name="name" placeholder="请输入公司简称" maxlength="15"
-									id="companyShortName" /> 
+									id="companyShortName" value="${comp.name!'' }" /> 
+								<input
+									type="text" name="fullname" value="${comp.fullname!'' }" placeholder="请输入公司全称" maxlength="35"
+									id="companyfullName" />
 								<input type="text"
 									placeholder="一句话描述公司优势，核心价值，限50字" maxlength="50" name="slogan"
-									id="companyFeatures" /> 
+									id="companyFeatures" value="${comp.slogan!'' }" /> 
 								<input type="submit" value="保存"
 									id="saveDetail" class="btn_small"> <a id="cancelDetail"
 									class="btn_cancel_s">取消</a>
@@ -186,7 +183,6 @@
 									</h2>
 								</dt>
 								<dd>
-									<form method="post" class="productForm">
 										<div class="new_product">
 
 											<div class="product_upload dn productNo">
@@ -195,36 +191,32 @@
 												</div>
 											</div>
 											<div class="product_upload productShow">
-												<img width="380" height="220"
-													src="/resources/images/product_default.png"> <span>更换产品图片<br>380*220px
+												<img width="380" height="220" id="comppimg"
+													src="<#if product??>${product.img!'' }<#else>/resources/images/product_default.png</#if>"> <span>更换产品图片<br>380*220px
 													小于5M
 												</span>
 											</div>
 
 											<input type="file" title="支持jpg、jpeg、gif、png格式，文件小于5M"
-												onchange="product_check(this,'http://www.Hongyi.com/c/upload.json','productNo','productShow','type','productInfos');"
-												name="myfiles" id="myfiles0"> <input type="hidden"
-												value="3" name="type" class="type"> <input
-												type="hidden" value="images/product_default.png"
-												name="productPicUrl" class="productInfos">
+												onchange="product_check(this,'uploadcompimg','productNo','productShow','type','productInfos');"
+												name="myfiles" id="myfiles0">
 										</div>
 
+									<form method="post" class="productForm" action="addproduct">
 										<div class="cp_intro">
-											<input type="text" placeholder="请输入产品名称" value="发大发"
-												name="product"> <input type="text"
-												placeholder="请输入产品网址" value="http://www.weimob.com"
-												name="productUrl">
-											<textarea placeholder="请简短描述该产品定位、产品特色、用户群体等" maxlength="500"
-												value="发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf"
-												class="s_textarea" name="productProfile">发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf</textarea>
+											<input type="text" placeholder="请输入产品名称" value="<#if product??>${product.title!'' }</#if>"
+												name="pname"> 
+												<input type="text" placeholder="请输入产品网址" value="<#if product??>${product.url!'' }</#if>" name="purl">
+											<textarea placeholder="请简短描述该产品定位、产品特色、用户群体等" maxlength="500" 
+												class="s_textarea" name="pintro"><#if product??>${product.intro!'' }</#if></textarea>
 
 											<div class="word_count fr">
 												你还可以输入 <span>500</span> 字
 											</div>
 											<div class="clear"></div>
-											<input type="submit" value="保存" class="btn_small"> <a
+											<input type="submit" value="保存" class="btn_small"> <!-- <a
 												class="btn_cancel_s product_delete"
-												href="javascript:void(0)">删除</a> <input type="hidden"
+												href="javascript:void(0)">删除</a> --> <input type="hidden"
 												value="11867" class="product_id">
 										</div>
 									</form>
@@ -238,12 +230,12 @@
 									</h2>
 								</dt>
 								<dd>
-									<img width="380" height="220" alt="发大发"
-										src="/resources/images/product_default.png">
+									<img width="380" height="220"
+										src="<#if product??>${product.img!'' }<#else>/resources/images/product_default.png</#if>">
 
 									<div class="cp_intro">
 										<h3>
-											<a target="_blank" href="http://www.weimob.com">发大发 </a>
+											<a target="_blank" href="<#if product??>${product.img!'' }</#if>"><#if product??>${product.title!'－－' }</#if> </a>
 										</h3>
 
 										<div class="scroll-pane"
@@ -254,18 +246,17 @@
 												<div class="jspPane"
 													style="padding: 0px; top: 0px; width: 260px;">
 													<div>
-														发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf发达发生的faf
+														<#if product??>${product.intro!'----' }</#if>
 													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 									<a title="编辑公司产品" class="c_edit product_edit"
-										href="javascript:void(0)"></a> <a title="新增公司产品"
-										class="c_add product_add" href="javascript:void(0)"></a>
+										href="javascript:void(0)"></a> <!-- <a title="新增公司产品"
+										class="c_add product_add" href="javascript:void(0)"></a> -->
 								</dd>
 							</dl>
-
 						</div>
 					</div>
 					<!-- end #Product -->
@@ -294,10 +285,9 @@
 									</h2>
 								</dt>
 								<dd>
-									<form id="companyDesForm">
+									<form id="companyDesForm" method="post" action="updateintro">
 										<textarea placeholder="请分段详细描述公司简介、企业文化等"
-											name="companyProfile" id="companyProfile">该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎</textarea>
-
+											name="compintro" id="companyProfile">${comp.intro!'' }</textarea>
 										<div class="word_count fr">
 											你还可以输入 <span>1000</span> 字
 										</div>
@@ -317,7 +307,7 @@
 									</h2>
 								</dt>
 								<dd>
-									<div class="c_intro">该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎该方法嘎嘎</div>
+									<div class="c_intro">${comp.intro!'' }</div>
 									<a title="编辑公司介绍" id="editIntro" class="c_edit"
 										href="javascript:void(0)"></a>
 								</dd>
@@ -338,7 +328,8 @@
 						</dt>
 						<dd>
 							<div class="addnew">
-								发布需要的人才信息，让伯乐和千里马尽快相遇……<br> <a href="create.html">+添加招聘职位</a>
+								发布需要的人才信息，让伯乐和千里马尽快相遇……<br> 
+								<a href="">+添加招聘职位</a>
 							</div>
 						</dd>
 					</dl>
@@ -358,21 +349,21 @@
 								<tbody>
 									<tr>
 										<td width="45">地点</td>
-										<td>上海</td>
+										<td>${comp.city!'' }</td>
 									</tr>
 									<tr>
 										<td>领域</td>
 										<!-- 支持多选 -->
-										<td title="移动互联网">移动互联网</td>
+										<td title="${comp.trade!'' }">${comp.trade!'' }</td>
 									</tr>
 									<tr>
 										<td>规模</td>
-										<td>150-500人</td>
+										<td>${comp.size!'' }</td>
 									</tr>
 									<tr>
 										<td>主页</td>
-										<td><a rel="nofollow" title="http://www.weimob.com"
-											target="_blank" href="http://www.weimob.com">http://www.weim...</a>
+										<td><a rel="nofollow" title="${comp.home!'' }"
+											target="_blank" href="${comp.home!'' }">${comp.home!'' }</a>
 										</td>
 									</tr>
 								</tbody>
@@ -380,60 +371,49 @@
 							<a id="editTags" class="c_edit" href="javascript:void(0)"></a>
 						</div>
 						<div id="c_tags_edit" class="c_tags editTags dn">
-							<form id="tagForms">
+							<form id="tagForms" method="get" action="updatecompinfo">
 								<table>
 									<tbody>
 										<tr>
 											<td>地点</td>
-											<td><input type="text" placeholder="请输入地点" value="上海"
+											<td><input type="text" placeholder="请输入地点" value="${comp.city!'' }"
 												name="city" id="city"></td>
 										</tr>
 										<tr>
 											<td>领域</td>
 											<!-- 支持多选 -->
-											<td><input type="hidden" value="移动互联网"
-												id="industryField" name="industryField"> <input
-												type="button"
-												style="background: none; cursor: default; border: none !important;"
-												disable="disable" value="移动互联网" id="select_ind"
-												class="select_tags"> <!-- <div id="box_ind" class="selectBox dn">
-                                            <ul class="reset">
-                                                                                                                                                            <li class="current">移动互联网</li>
-                                                                                                                                                </ul>
-                                        </div>	 --></td>
+											<td><input type="text" value="${comp.trade!'' }"
+												id="industryField" name="trade" />
+                                            </td>
 										</tr>
 										<tr>
 											<td>规模</td>
-											<td><input type="hidden" value="150-500人"
-												id="companySize" name="companySize"> <input
+											<td><input type="hidden" value="${comp.size!'' }"
+												id="companySize" name="size"> <input
 												type="button" value="150-500人" id="select_sca"
 												class="select_tags">
 
 												<div class="selectBox dn" id="box_sca"
 													style="display: none;">
 													<ul class="reset">
-														<li>少于15人</li>
-														<li>15-50人</li>
-														<li>50-150人</li>
-														<li class="current">150-500人</li>
-														<li>500-2000人</li>
-														<li>2000人以上</li>
+														<li <#if comp.size=="少于15人">class="current"</#if>>少于15人</li>
+														<li <#if comp.size=="15-50人">class="current"</#if>>15-50人</li>
+														<li <#if comp.size=="50-150人">class="current"</#if>>50-150人</li>
+														<li <#if comp.size=="150-500人">class="current"</#if>>150-500人</li>
+														<li <#if comp.size=="500-2000人">class="current"</#if>>500-2000人</li>
+														<li <#if comp.size=="2000人以上">class="current"</#if>>2000人以上</li>
 													</ul>
 												</div></td>
 										</tr>
 										<tr>
 											<td>主页</td>
 											<td><input type="text" placeholder="请输入网址"
-												value="http://www.weimob.com" name="companyUrl"
+												value="${comp.home!'' }" name="home"
 												id="companyUrl"></td>
 										</tr>
 									</tbody>
 								</table>
-								<input type="hidden" id="comCity" value="上海"> <input
-									type="hidden" id="comInd" value="移动互联网"> <input
-									type="hidden" id="comSize" value="150-500人"> <input
-									type="hidden" id="comUrl" value="http://www.zmtpost.com">
-								<input type="submit" value="保存" id="submitFeatures"
+								<input type="submit" value="保存"
 									class="btn_small"> <a id="cancelFeatures"
 									class="btn_cancel_s" href="javascript:void(0)">取消</a>
 
@@ -452,13 +432,14 @@
 						</dt>
 						<dd>
 							<ul class="reset stageshow">
-								<li>目前阶段：<span class="c5">天使轮</span></li>
+								<li>目前阶段：<span class="c5">${comp.stage!'' }</span></li>
 							</ul>
-							<form class="dn" id="stageform">
+							<form class="dn" id="stageform" method="post" action="stageform">
 								<div class="stageSelect">
-									<label>目前阶段</label> <input type="hidden" value="天使轮"
-										id="financeStage" name="financeStage"> <input
-										type="button" value="天使轮" id="select_fin"
+									<label>目前阶段</label> 
+									<input type="hidden" value="${comp.stage!'' }"
+										id="financeStage" name="stage"> <input
+										type="button" value="${comp.stage!'' }" id="select_fin"
 										class="select_tags_short fl">
 
 									<div class="selectBoxShort dn" id="box_fin"
@@ -488,49 +469,12 @@
 										</ul>
 									</div>
 								</div>
-								<ul id="stagesList" class="reset">
-									<li><label>融资阶段</label> <input type="hidden"
-										class="select_invest_hidden" name="select_invest_hidden">
-										<input type="button" value="融资阶段"
-										class="select_tags_short select_invest">
-
-										<div class="selectBoxShort dn" style="display: none;">
-											<ul class="reset">
-												<li>天使轮</li>
-												<li>A轮</li>
-												<li>B轮</li>
-												<li>C轮</li>
-												<li>D轮及以上</li>
-												<li>上市公司</li>
-											</ul>
-										</div> <label>投资机构</label> <input type="text" placeholder="如真格基金"
-										name="stageorg" value=""></li>
-								</ul>
 								<input type="submit" value="保存" class="btn_small"> <a
 									id="cancelStages" class="btn_cancel_s"
 									href="javascript:void(0)">取消</a>
 
 								<div class="clear"></div>
 
-								<div class="dn" id="cloneInvest">
-									<label>融资阶段</label> <input type="hidden"
-										class="select_invest_hidden" name="select_invest_hidden">
-									<input type="button" value="发展阶段"
-										class="select_tags_short select_invest">
-
-									<div class="selectBoxShort dn" style="display: none;">
-										<ul class="reset">
-											<li>天使轮</li>
-											<li>A轮</li>
-											<li>B轮</li>
-											<li>C轮</li>
-											<li>D轮及以上</li>
-											<li>上市公司</li>
-										</ul>
-									</div>
-									<label>投资机构</label> <input type="text" placeholder="如真格基金"
-										name="stageorg">
-								</div>
 							</form>
 						</dd>
 					</dl>
@@ -542,9 +486,8 @@
 						<dl class="c_section c_member">
 							<dt>
 								<h2>
-									<em></em>创始团队
+									<em></em>主要创始人
 								</h2>
-								<a title="添加创始人" class="c_add" href="javascript:void(0)"></a>
 							</dt>
 							<dd>
 
@@ -558,39 +501,38 @@
 
 									<!-- 编辑创始人 -->
 									<div class="member_info newMember dn">
-										<form class="memberForm">
 											<div class="new_portrait">
 												<div class="portrait_upload dn portraitNo">
 													<span>上传创始人头像</span>
 												</div>
 												<div class="portraitShow">
-													<img width="120" height="120"
-														src="/resources/images/leader_default.png"> <span>更换头像</span>
+													<img width="120" height="120" id="memberimg"
+														src="${comp.memberimg!'/resources/images/leader_default.png'}"> <span>更换头像</span>
 												</div>
 												<input type="file" value=""
 													title="支持jpg、jpeg、gif、png格式，文件小于5M"
-													onchange="member_check(this,'http://www.Hongyi.com/c/upload.json','portraitNo','portraitShow','type','leaderInfos');"
+													onchange="member_check(this,'uploadcompimg?type=1','portraitNo','portraitShow','type','leaderInfos');"
 													name="myfiles" id="profiles0"> <input type="hidden"
 													value="7" name="type" class="type"> <input
-													type="hidden" value="images/leader_default.png"
+													type="hidden" value="${comp.memberimg!'/resources/images/leader_default.png'}"
 													name="photo" class="leaderInfos"> <em>
 													尺寸：120*120px <br> 大小：小于5M
 												</em>
 											</div>
-											<input type="text" placeholder="请输入创始人姓名" value="孙泰英"
-												name="name"> <input type="text"
-												placeholder="请输入创始人当前职位" value="ceo" name="position">
+										<form class="memberForm" method="post" action="memberform">
+											<input type="text" placeholder="请输入创始人姓名" value="${comp.membername!'' }"
+												name="membername"> <input type="text"
+												placeholder="请输入创始人当前职位" value="${comp.job!'' }" name="job">
 											<input type="text" placeholder="请输入创始人新浪微博地址"
-												value="http://weimob.weibo.com" name="weibo">
+												value="${comp.weibo!'' }" name="weibo">
 											<textarea placeholder="请输入创始人个人简介" maxlength="500"
-												class="s_textarea" name="remark">发放的发达范德萨范德萨范德萨发的复大发大水发生的</textarea>
+												class="s_textarea" name="memberinfo">${comp.memberinfo!'' }</textarea>
 
 											<div class="word_count fr">
 												你还可以输入 <span>500</span> 字
 											</div>
 											<div class="clear"></div>
-											<input type="submit" value="保存" class="btn_small"> <a
-												class="btn_cancel_s member_delete" href="javascript:void(0)">删除</a>
+											<input type="submit" value="保存" class="btn_small">
 											<input type="hidden" value="11493" class="leader_id">
 										</form>
 									</div>
@@ -602,15 +544,15 @@
 
 										<div class="m_portrait">
 											<div></div>
-											<img width="120" height="120" alt="孙泰英"
-												src="/resources/images/leader_default.png">
+											<img width="120" height="120"
+												src="${comp.memberimg!'/resources/images/leader_default.png'}">
 										</div>
 										<div class="m_name">
-											孙泰英 <a target="_blank" class="weibo"
-												href="http://weimob.weibo.com"></a>
+											${comp.membername!'' } <a target="_blank" class="weibo"
+												href="${comp.weibo!'' }"></a>
 										</div>
-										<div class="m_position">ceo</div>
-										<div class="m_intro">发放的发达范德萨范德萨范德萨发的复大发大水发生的</div>
+										<div class="m_position">${comp.job!'' }</div>
+										<div class="m_intro">${comp.memberinfo!'' }</div>
 									</div>
 
 								</div>

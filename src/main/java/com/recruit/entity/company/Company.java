@@ -28,15 +28,21 @@ public class Company implements Serializable {
 	private String slogan;// 口号
 	private int auther;// 是否认证 0:否 1:是
 	private String trade;// 领域
-	private int size;// 规模（0:0〜50 1:50〜150 2:150〜300 3:300〜500 4:500〜10000
+	private String size;// 规模（0:0〜50 1:50〜150 2:150〜300 3:300〜500 4:500〜10000
 						// 5:1000以上）
 	private String home;// 主页
+	private String productimg;// 产品图片ID
 	private String stage;// 目前阶段
 	private String investors;// 投资机构
 	private String address;// 工作地址
 	private String city;// 所在城市
 	private String intro;// 企业简介
 	private String telephone;// 座机
+	private String memberimg;// 创始人头像
+	private String membername;// 创始人姓名
+	private String job;// 创始人职位
+	private String weibo;// 创始人微博
+	private String memberinfo;// 创始人简介
 	private Date createtime;
 
 	@Id
@@ -103,12 +109,12 @@ public class Company implements Serializable {
 		this.trade = trade;
 	}
 
-	@Column(length = 1, nullable = false, columnDefinition = "int default 0")
-	public int getSize() {
+	@Column(length = 7)
+	public String getSize() {
 		return size;
 	}
 
-	public void setSize(int size) {
+	public void setSize(String size) {
 		this.size = size;
 	}
 
@@ -189,6 +195,60 @@ public class Company implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	@Column(length = 199)
+	public String getProductimg() {
+		return productimg;
+	}
+
+	public void setProductimg(String productimg) {
+		this.productimg = productimg;
+	}
+
+	@Column(length = 199)
+	public String getMemberimg() {
+		return memberimg;
+	}
+
+	public void setMemberimg(String memberimg) {
+		this.memberimg = memberimg;
+	}
+
+	@Column(length = 33)
+	public String getMembername() {
+		return membername;
+	}
+
+	public void setMembername(String membername) {
+		this.membername = membername;
+	}
+
+	@Column(length = 33)
+	public String getJob() {
+		return job;
+	}
+
+	public void setJob(String job) {
+		this.job = job;
+	}
+
+	@Column(length = 199)
+	public String getWeibo() {
+		return weibo;
+	}
+
+	public void setWeibo(String weibo) {
+		this.weibo = weibo;
+	}
+
+	@Column(length = 500)
+	public String getMemberinfo() {
+		return memberinfo;
+	}
+
+	public void setMemberinfo(String memberinfo) {
+		this.memberinfo = memberinfo;
 	}
 
 }

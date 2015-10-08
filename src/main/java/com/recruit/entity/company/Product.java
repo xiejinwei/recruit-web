@@ -14,8 +14,8 @@ public class Product implements Serializable {
 
 	private static final long serialVersionUID = 2816034445903785989L;
 
-	private String id;
-	private String cid;// 公司id
+	private String id;// 公司id
+	private String cid;
 	private String img;// 产品图片
 	private String title;// 产品名称
 	private String url;// 网址
